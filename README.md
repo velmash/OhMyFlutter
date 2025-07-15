@@ -1,6 +1,4 @@
 # OhMyFlutter
-study
-
 
 세팅
 - VSCode cmd shift p
