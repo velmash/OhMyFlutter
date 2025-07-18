@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,6 +11,14 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  bool showLargeTitle = true;
+
+  void toggleLargeTitle() {
+    setState(() {
+      showLargeTitle = !showLargeTitle;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,7 +30,13 @@ class _AppState extends State<App> {
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [MyLargeTitle()],
+            children: [
+              showLargeTitle ? MyLargeTitle() : Text("Nothing!"),
+              IconButton(
+                onPressed: toggleLargeTitle,
+                icon: Icon(Icons.remove_red_eye),
+              ),
+            ],
           ),
         ),
       ),
@@ -29,11 +44,29 @@ class _AppState extends State<App> {
   }
 }
 
-class MyLargeTitle extends StatelessWidget {
+class MyLargeTitle extends StatefulWidget {
   const MyLargeTitle({super.key});
 
   @override
+  State<MyLargeTitle> createState() => _MyLargeTitleState();
+}
+
+class _MyLargeTitleState extends State<MyLargeTitle> {
+  @override
+  void initState() {
+    super.initState();
+    print("initState!");
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print("dispose!");
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print("build!");
     return Text(
       "MyLargeTitle",
       style: TextStyle(
