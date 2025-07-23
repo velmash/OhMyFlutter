@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Firebase Example',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: AuthWrapper(),
+      routes: {'/': (context) => const AuthWrapper()},
     );
   }
 }
