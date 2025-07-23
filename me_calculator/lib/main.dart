@@ -1,8 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:mcp_toolkit/mcp_toolkit.dart';
+import 'dart:async';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      MCPToolkitBinding.instance
+        ..initialize() // Initializes the Toolkit
+        ..initializeFlutterToolkit(); // Adds Flutter related methods to the MCP server
+      runApp(const MyApp()); // Ensure MyApp is their actual root widget
+    },
+    (error, stack) {
+      // Critical: Handle zone errors for MCP server error reporting
+      MCPToolkitBinding.instance.handleZoneError(error, stack);
+    },
+  );
 }
+
+// void main() {
+//   runApp(const MyApp());
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
