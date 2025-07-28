@@ -22,6 +22,7 @@ class _ResetPasswordDialogState extends State<ResetPasswordDialog> {
   Future<void> _sendResetEmail() async {
     setState(() {
       _isLocalSending = true;
+
       _errorMessage = '';
     });
 
