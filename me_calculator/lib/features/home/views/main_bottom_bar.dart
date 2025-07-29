@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:me_calculator/screens/setting_screen.dart';
+import 'package:me_calculator/features/settings/views/setting_view.dart';
 
 class MainBottomBar extends StatefulWidget {
   const MainBottomBar({super.key});

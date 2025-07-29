@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:me_calculator/screens/sign_in_screen.dart';
-import 'package:me_calculator/widgets/login/_login_actions.dart';
-import 'package:me_calculator/widgets/login/_login_form.dart';
-import 'package:me_calculator/widgets/login/_login_header.dart';
-import 'package:me_calculator/widgets/login/_reset_password_dialog.dart';
+import 'package:me_calculator/features/auth/views/sign_in_view.dart';
+import 'package:me_calculator/widgets/shared/login/_login_actions.dart';
+import 'package:me_calculator/widgets/shared/login/_login_form.dart';
+import 'package:me_calculator/widgets/shared/login/_login_header.dart';
+import 'package:me_calculator/widgets/shared/login/_reset_password_dialog.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginView> createState() => _LoginViewState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginViewState extends State<LoginView> {
   void _navigateToSignUp() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const SignInScreen()),
+      MaterialPageRoute(builder: (context) => const SignInView()),
     );
   }
 
