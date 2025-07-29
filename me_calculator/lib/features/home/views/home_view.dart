@@ -19,6 +19,14 @@ class HomeScreen extends StatelessWidget {
     ),
   ];
 
+  void _onTapAddCharacter() {
+    print("캐릭터 생성 버튼 탭");
+  }
+
+  void _onTapCard(MyCharacter myCharacter) {
+    print("캐릭터 카드 선택 ${myCharacter.nickName}");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                       ),
 
                       GestureDetector(
-                        onTap: () => {print("HI")},
+                        onTap: _onTapAddCharacter,
                         child: Text(
                           "추가",
                           style: TextStyle(
@@ -78,7 +86,10 @@ class HomeScreen extends StatelessWidget {
                     Text("등록된 캐릭터가 없습니다.\n상단의 버튼을 이용해 캐릭터를 등록해주세요.")
                   else
                     for (var character in myCharacters) ...[
-                      CharacterCard(myCharacter: character),
+                      CharacterCard(
+                        myCharacter: character,
+                        onTap: () => _onTapCard(character),
+                      ),
                       SizedBox(height: 10),
                     ],
                 ],
