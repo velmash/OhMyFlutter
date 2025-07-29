@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "519272274201",
+    "project_id": "mecalc-481fe",
+    "storage_bucket": "mecalc-481fe.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519272274201:android:e7c8948c8009ae350f4d88",
+        "android_client_info": {
+          "package_name": "com.example.me_calculator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBD5_Pu7Bc6sND4f5Qakg1DSDiD6ja_Jg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
