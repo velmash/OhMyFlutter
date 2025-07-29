@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:me_calculator/features/settings/views/setting_view.dart';
+import 'package:me_calculator/features/home/views/home_view.dart';
+import 'package:me_calculator/features/setting/views/setting_view.dart';
 
 class MainBottomBar extends StatefulWidget {
   const MainBottomBar({super.key});
@@ -17,7 +18,7 @@ class _MainBottomBarState extends State<MainBottomBar> {
   );
 
   static const List<Widget> _widgetOptions = <Widget>[
-    Text('Index 0: Home', style: optionStyle),
+    HomeScreen(),
     SettingScreen(),
   ];
 

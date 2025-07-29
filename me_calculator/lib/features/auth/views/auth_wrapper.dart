@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:me_calculator/features/auth/views/login_view.dart';
-import 'package:me_calculator/features/home/views/home_view.dart';
+import 'package:me_calculator/main_bottom_bar.dart';
 
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({super.key});
@@ -16,7 +16,7 @@ class AuthWrapper extends StatelessWidget {
           if (user == null) {
             return const LoginView();
           }
-          return const HomeScreen();
+          return const MainBottomBar();
         } else {
           return const Center(child: CircularProgressIndicator());
         }
