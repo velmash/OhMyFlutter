@@ -24,7 +24,10 @@ class HomeViewModel extends ChangeNotifier {
 
   Future<void> fetchCharacters() async {
     _state = ViewState.loading;
-    notifyListeners();
+    // Only notify listeners if the ViewModel is still active
+    if (hasListeners) {
+      notifyListeners();
+    }
 
     try {
       _characters = await _characterService.getUserCharacters(userId);
@@ -34,6 +37,9 @@ class HomeViewModel extends ChangeNotifier {
       _errorMessage = e.toString();
     }
 
-    notifyListeners();
+    // Only notify listeners if the ViewModel is still active
+    if (hasListeners) {
+      notifyListeners();
+    }
   }
 }
