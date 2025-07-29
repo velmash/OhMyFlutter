@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:me_calculator/features/add_character/add_character_view.dart';
+import 'package:me_calculator/features/boss_config/views/boss_config_view.dart';
 import 'package:me_calculator/features/home/views/widgets/character_card.dart';
 import 'package:me_calculator/models/character.dart';
 
@@ -27,11 +29,17 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   void _onTapAddCharacter() {
-    print("캐릭터 생성 버튼 탭");
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AddCharacterView()),
+    );
   }
 
   void _onTapCard(MyCharacter myCharacter) {
-    print("캐릭터 카드 선택 ${myCharacter.nickName}");
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => BossConfigView()),
+    );
   }
 
   @override
