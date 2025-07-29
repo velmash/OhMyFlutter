@@ -12,11 +12,6 @@ class MainBottomBar extends StatefulWidget {
 class _MainBottomBarState extends State<MainBottomBar> {
   int _selectedIndex = 0;
 
-  static const TextStyle optionStyle = TextStyle(
-    fontSize: 30,
-    fontWeight: FontWeight.bold,
-  );
-
   static List<Widget> _widgetOptions = <Widget>[HomeScreen(), SettingScreen()];
 
   void _onItemTapped(int index) {

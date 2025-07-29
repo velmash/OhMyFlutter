@@ -2,20 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:me_calculator/features/home/views/widgets/character_card.dart';
 import 'package:me_calculator/models/character.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   List<MyCharacter> myCharacters = [
     MyCharacter(
       nickName: "수원오피스",
       imagePath:
           "https://open.api.nexon.com/static/maplestory/character/look/AFLJBGPHNGLMOBKANJGJDJHGAILFNHAOBPAMEEEKFMNDJAOOJJLODAPLAFPDKPPCFIHLBJLHAPLBJKMAKMMEJHHNHDKJILCKOGMCAONOPNLCNCKANOEECBAIAMGADABFDPLKIEGPLIGHCJKCOJDIAKEJOKJCMOBPDHCNGCOHBPOKABFAONFLLIJCFJKOOKPKAKIGLKMDHBLCKILNDAIBDDLIHKHEFKFOBHPMPEFNIECIFHIAFGAFMOKBDPAGLCHK",
+      ocid: "bbfee59e10f70371c025e6091e577c3aefe8d04e6d233bd35cf2fabdeb93fb0d",
     ),
 
     MyCharacter(
       nickName: "언주보마",
       imagePath:
           "https://open.api.nexon.com/static/maplestory/character/look/FEEFPOOCEIFHHPJFCMMMMNHICBACCKMHOBHJFCBCCJIANNOCMCKIMPLFLJENCAOGLOPONFNMCPBAGJCJNOIHPNFEHHBOBOLHBDDEPHDKJJFOPHMKDFLMDEDHIBJBPADLNKAAFNJJBGCLKGHBCMPOMMCFJIHNBKCDHHNGIICHNDBLHLABDDHAPDDGIPIBKGFMHFNAKJFONHGCKNIMOPFKGLIHOLCGMCLIDPGANGPGGNJLIJJNGGKDNLOGEDKMEIOK",
+      ocid: "3aca53cb9f42fd665e0795494daa33f1efe8d04e6d233bd35cf2fabdeb93fb0d",
     ),
   ];
 
