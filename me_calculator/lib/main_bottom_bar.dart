@@ -17,10 +17,7 @@ class _MainBottomBarState extends State<MainBottomBar> {
     fontWeight: FontWeight.bold,
   );
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    SettingScreen(),
-  ];
+  static List<Widget> _widgetOptions = <Widget>[HomeScreen(), SettingScreen()];
 
   void _onItemTapped(int index) {
     setState(() {
