@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -39,10 +40,27 @@ class _SignInScreenState extends State<SignInView> {
     });
 
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
+      // 1. Firebase Auth를 통해 사용자 생성
+      final UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim(),
+          );
+
+      final User? newUser = userCredential.user;
+
+      if (newUser != null) {
+        try {
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(newUser.uid)
+              .set({'email': newUser.email, 'createdAt': Timestamp.now()});
+        } catch (e) {
+          // Firestore 저장 실패 시 사용자 삭제
+          await newUser.delete();
+          throw Exception('Firestore 저장 실패로 인해 회원가입 취소됨');
+        }
+      }
 
       // 성공 시
       scaffoldMessenger.showSnackBar(
