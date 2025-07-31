@@ -1,9 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:me_calculator/core/router/auth_notifier.dart';
 import 'package:me_calculator/data/datasources/firebase/firestore_datasource.dart';
 import 'package:me_calculator/data/repositories/character_repository_impl.dart';
 import 'package:me_calculator/domain/repositories/character_repository.dart';
 import 'package:me_calculator/domain/usecases/get_character_usecase.dart';
 import 'package:me_calculator/presentation/home/providers/home_provider.dart';
+
+final authNotifierProvider = ChangeNotifierProvider<AuthNotifier>((ref) {
+  return AuthNotifier();
+});
 
 final storeDataSource = Provider<FirestoreDatasource>((ref) {
   return FirestoreDatasourceImpl();

@@ -16,7 +16,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(homeProvider.notifier).loadCharacters();
+      if (mounted) {
+        ref.read(homeProvider.notifier).loadCharacters();
+      }
     });
   }
 
