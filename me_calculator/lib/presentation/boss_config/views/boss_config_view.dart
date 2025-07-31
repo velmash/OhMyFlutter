@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BossConfigView extends StatelessWidget {
+class BossConfigView extends ConsumerStatefulWidget {
   const BossConfigView({super.key});
 
+  @override
+  ConsumerState<BossConfigView> createState() => _BossConfigState();
+}
+
+class _BossConfigState extends ConsumerState<BossConfigView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

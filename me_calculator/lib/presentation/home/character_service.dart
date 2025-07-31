@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:me_calculator/domain/entities/my_character.dart';
 
 class CharacterService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -37,7 +36,12 @@ class CharacterService {
   // 캐릭터 삭제
   Future<void> deleteCharacter(String userId, String ocid) async {
     try {
-      await _firestore.collection('users').doc(userId).collection('characters').doc(ocid).delete();
+      await _firestore
+          .collection('users')
+          .doc(userId)
+          .collection('characters')
+          .doc(ocid)
+          .delete();
     } catch (e) {
       print('캐릭터 삭제 실패: $e');
       rethrow;
