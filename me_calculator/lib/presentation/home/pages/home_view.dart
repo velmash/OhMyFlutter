@@ -6,22 +6,26 @@ import 'package:me_calculator/presentation/home/widgets/character_card.dart';
 import 'package:me_calculator/domain/entities/my_character.dart';
 import 'package:me_calculator/providers.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
-  void _onTapAddCharacter(BuildContext context, WidgetRef ref) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const AddCharacterView())).then((_) {
-      // ref를 사용하여 notifier의 메소드를 호출합니다.
+  @override
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // 위젯이 처음 빌드될 때 캐릭터 목록을 로드합니다.
+    // postFrameCallback을 사용하여 첫 프레임이 렌더링된 후에 안전하게 호출합니다.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(homeProvider.notifier).loadCharacters();
     });
   }
 
-  void _onTapCard(BuildContext context, MyCharacter myCharacter) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const BossConfigView()));
-  }
-
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     // Riverpod의 select를 사용하여 상태의 특정 부분만 수신(watch)합니다.
     final characters = ref.watch(homeProvider.select((state) => state.characters));
     final isLoading = ref.watch(homeProvider.select((state) => state.isLoading));
@@ -47,7 +51,7 @@ class HomeScreen extends ConsumerWidget {
                   const Text("나의 캐릭터들", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
                   const SizedBox(width: 10),
                   GestureDetector(
-                    onTap: () => _onTapAddCharacter(context, ref), // ref 전달
+                    onTap: () => ref.navigateToAddCharacter(context),
                     child: const Text(
                       "추가",
                       style: TextStyle(color: Colors.blue, fontSize: 16, fontWeight: FontWeight.w600),
@@ -76,7 +80,10 @@ class HomeScreen extends ConsumerWidget {
                           final character = characters[index];
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 10),
-                            child: CharacterCard(myCharacter: character, onTap: () => _onTapCard(context, character)),
+                            child: CharacterCard(
+                              myCharacter: character,
+                              onTap: () => ref.navigateToBossConfig(context, character),
+                            ),
                           );
                         },
                       ),
@@ -86,5 +93,21 @@ class HomeScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+}
+
+extension HomeNavigator on WidgetRef {
+  void navigateToAddCharacter(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const AddCharacterView())).then((_) {
+      // AddCharacterView에서 돌아왔을 때 캐릭터 목록을 다시 로드합니다.
+      read(homeProvider.notifier).loadCharacters();
+    });
+  }
+
+  void navigateToBossConfig(BuildContext context, MyCharacter myCharacter) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const BossConfigView())).then((_) {
+      // BossConfigView에서 돌아왔을 때 캐릭터 목록을 다시 로드합니다.
+      read(homeProvider.notifier).loadCharacters();
+    });
   }
 }
