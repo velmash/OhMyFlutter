@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:me_calculator/core/router/router_config.dart';
 import 'package:me_calculator/presentation/auth/views/auth_wrapper.dart';
 import 'package:me_calculator/firebase_options.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,6 +17,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(routes: {'/': (context) => const AuthWrapper()});
+    return MaterialApp.router(title: "Mesangy", routerConfig: AppRouter.router);
   }
 }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:me_calculator/presentation/auth/views/login_view.dart';
-import 'package:me_calculator/main_bottom_bar.dart';
-import 'package:me_calculator/presentation/home/pages/home_view.dart';
+import 'package:go_router/go_router.dart';
 
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({super.key});
@@ -14,10 +12,18 @@ class AuthWrapper extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           User? user = snapshot.data;
-          if (user == null) {
-            return const LoginView();
-          }
-          return const MainBottomBar();
+
+          // go_router의 redirect 로직이 처리하므로
+          // 여기서는 로딩 상태만 처리
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (user == null) {
+              context.go('/login');
+            } else {
+              context.go('/home');
+            }
+          });
+
+          return const Center(child: CircularProgressIndicator());
         } else {
           return const Center(child: CircularProgressIndicator());
         }

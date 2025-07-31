@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:me_calculator/presentation/add_character/add_character_view.dart';
-import 'package:me_calculator/presentation/boss_config/views/boss_config_view.dart';
+import 'package:go_router/go_router.dart';
 import 'package:me_calculator/presentation/home/widgets/character_card.dart';
-import 'package:me_calculator/domain/entities/my_character.dart';
 import 'package:me_calculator/providers.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -17,8 +15,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // 위젯이 처음 빌드될 때 캐릭터 목록을 로드합니다.
-    // postFrameCallback을 사용하여 첫 프레임이 렌더링된 후에 안전하게 호출합니다.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(homeProvider.notifier).loadCharacters();
     });
@@ -26,11 +22,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Riverpod의 select를 사용하여 상태의 특정 부분만 수신(watch)합니다.
-    final characters = ref.watch(homeProvider.select((state) => state.characters));
-    final isLoading = ref.watch(homeProvider.select((state) => state.isLoading));
-    // homeState에 errorMessage: String? 필드가 있다고 가정합니다.
-    final errorMessage = ref.watch(homeProvider.select((state) => state.errorMessage));
+    final characters = ref.watch(
+      homeProvider.select((state) => state.characters),
+    );
+    final isLoading = ref.watch(
+      homeProvider.select((state) => state.isLoading),
+    );
+    final errorMessage = ref.watch(
+      homeProvider.select((state) => state.errorMessage),
+    );
     final homeNotifier = ref.read(homeProvider.notifier);
 
     return Scaffold(
@@ -40,21 +40,40 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("주간 총 수익", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+              const Text(
+                "주간 총 수익",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              ),
               Text(
-                characters.isEmpty ? "0 메소" : "22,333,444 메소", // `characters` 사용
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+                characters.isEmpty ? "0 메소" : "22,333,444 메소",
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               const SizedBox(height: 30),
               Row(
                 children: [
-                  const Text("나의 캐릭터들", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                  const Text(
+                    "나의 캐릭터들",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
                   const SizedBox(width: 10),
                   GestureDetector(
-                    onTap: () => ref.navigateToAddCharacter(context),
+                    onTap: () {
+                      // go_router로 캐릭터 추가 페이지로 이동
+                      context.push('/add-character').then((_) {
+                        // 돌아올 때 캐릭터 목록 재로드
+                        homeNotifier.loadCharacters();
+                      });
+                    },
                     child: const Text(
                       "추가",
-                      style: TextStyle(color: Colors.blue, fontSize: 16, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ],
@@ -69,7 +88,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         children: [
                           Text(errorMessage),
                           const SizedBox(height: 10),
-                          ElevatedButton(onPressed: () => homeNotifier.loadCharacters(), child: const Text('다시 시도')),
+                          ElevatedButton(
+                            onPressed: () => homeNotifier.loadCharacters(),
+                            child: const Text('다시 시도'),
+                          ),
                         ],
                       )
                     : characters.isEmpty
@@ -82,7 +104,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             padding: const EdgeInsets.only(bottom: 10),
                             child: CharacterCard(
                               myCharacter: character,
-                              onTap: () => ref.navigateToBossConfig(context, character),
+                              onTap: () {
+                                // go_router로 보스 설정 페이지로 이동 (캐릭터 ID 전달)
+                                context
+                                    .push('/boss-config/${character.ocid}')
+                                    .then((_) {
+                                      // 돌아올 때 캐릭터 목록 재로드
+                                      homeNotifier.loadCharacters();
+                                    });
+                              },
                             ),
                           );
                         },
@@ -93,21 +123,5 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
       ),
     );
-  }
-}
-
-extension HomeNavigator on WidgetRef {
-  void navigateToAddCharacter(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const AddCharacterView())).then((_) {
-      // AddCharacterView에서 돌아왔을 때 캐릭터 목록을 다시 로드합니다.
-      read(homeProvider.notifier).loadCharacters();
-    });
-  }
-
-  void navigateToBossConfig(BuildContext context, MyCharacter myCharacter) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const BossConfigView())).then((_) {
-      // BossConfigView에서 돌아왔을 때 캐릭터 목록을 다시 로드합니다.
-      read(homeProvider.notifier).loadCharacters();
-    });
   }
 }

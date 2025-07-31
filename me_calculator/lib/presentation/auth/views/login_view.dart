@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:me_calculator/presentation/auth/views/sign_in_view.dart';
+import 'package:go_router/go_router.dart';
 import 'package:me_calculator/presentation/auth/views/widgets/_login_actions.dart';
 import 'package:me_calculator/presentation/auth/views/widgets/_login_form.dart';
 import 'package:me_calculator/presentation/auth/views/widgets/_login_header.dart';
@@ -14,7 +14,8 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   void _navigateToSignUp() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const SignInView()));
+    // go_router로 회원가입 페이지로 이동
+    context.push('/sign-up');
   }
 
   void _showResetPwDialog() {
