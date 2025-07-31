@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:me_calculator/features/add_character/add_character_view.dart';
-import 'package:me_calculator/features/boss_config/views/boss_config_view.dart';
+import 'package:me_calculator/presentation/add_character/add_character_view.dart';
+import 'package:me_calculator/presentation/boss_config/views/boss_config_view.dart';
 import 'package:me_calculator/presentation/home/widgets/character_card.dart';
 import 'package:me_calculator/domain/entities/my_character.dart';
 import 'package:me_calculator/providers.dart';

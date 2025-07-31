@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:me_calculator/features/auth/views/sign_in_view.dart';
-import 'package:me_calculator/features/auth/views/widgets/_login_actions.dart';
-import 'package:me_calculator/features/auth/views/widgets/_login_form.dart';
-import 'package:me_calculator/features/auth/views/widgets/_login_header.dart';
-import 'package:me_calculator/features/auth/views/widgets/_reset_password_dialog.dart';
+import 'package:me_calculator/presentation/auth/views/sign_in_view.dart';
+import 'package:me_calculator/presentation/auth/views/widgets/_login_actions.dart';
+import 'package:me_calculator/presentation/auth/views/widgets/_login_form.dart';
+import 'package:me_calculator/presentation/auth/views/widgets/_login_header.dart';
+import 'package:me_calculator/presentation/auth/views/widgets/_reset_password_dialog.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -14,10 +14,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   void _navigateToSignUp() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const SignInView()),
-    );
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const SignInView()));
   }
 
   void _showResetPwDialog() {

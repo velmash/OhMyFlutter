@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:me_calculator/presentation/home/pages/home_view.dart';
-import 'package:me_calculator/features/setting/views/setting_view.dart';
+import 'package:me_calculator/presentation/setting/views/setting_view.dart';
 
 class MainBottomBar extends StatefulWidget {
   const MainBottomBar({super.key});

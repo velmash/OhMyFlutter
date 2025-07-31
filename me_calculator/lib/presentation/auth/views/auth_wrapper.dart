@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:me_calculator/features/auth/views/login_view.dart';
+import 'package:me_calculator/presentation/auth/views/login_view.dart';
 import 'package:me_calculator/main_bottom_bar.dart';
 import 'package:me_calculator/presentation/home/pages/home_view.dart';
 
