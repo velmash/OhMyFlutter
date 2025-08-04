@@ -17,22 +17,66 @@ enum _Difficulty {
 
 // 2. 보스 데이터 정의 (비공개 enum)
 enum _Boss {
-  zakum(name: 'zakum', displayName: '자쿰', rewards: {_Difficulty.chaos: 8080000}),
-  magnus(name: 'magnus', displayName: '매그너스', rewards: {_Difficulty.hard: 8560000}),
+  zakum(
+    name: 'zakum',
+    displayName: '자쿰',
+    rewards: {_Difficulty.chaos: 8080000},
+  ),
+  magnus(
+    name: 'magnus',
+    displayName: '매그너스',
+    rewards: {_Difficulty.hard: 8560000},
+  ),
   hilla(name: 'hilla', displayName: '힐라', rewards: {_Difficulty.hard: 5750000}),
-  papulatus(name: 'papulatus', displayName: '파풀라투스', rewards: {_Difficulty.chaos: 17300000}),
-  pierre(name: 'pierre', displayName: '피에르', rewards: {_Difficulty.chaos: 8170000}),
-  banban(name: 'banban', displayName: '반반', rewards: {_Difficulty.chaos: 8150000}),
-  bloodyQueen(name: 'bloodyQueen', displayName: '블러디 퀸', rewards: {_Difficulty.chaos: 8140000}),
-  vellum(name: 'vellum', displayName: '벨룸', rewards: {_Difficulty.chaos: 9280000}),
-  pinkbin(name: 'pinkbin', displayName: "핑크빈", rewards: {_Difficulty.chaos: 6580000}),
-  cygnus(name: 'cygnus', displayName: '시그너스', rewards: {_Difficulty.easy: 4550000, _Difficulty.normal: 7500000}),
+  papulatus(
+    name: 'papulatus',
+    displayName: '파풀라투스',
+    rewards: {_Difficulty.chaos: 17300000},
+  ),
+  pierre(
+    name: 'pierre',
+    displayName: '피에르',
+    rewards: {_Difficulty.chaos: 8170000},
+  ),
+  banban(
+    name: 'banban',
+    displayName: '반반',
+    rewards: {_Difficulty.chaos: 8150000},
+  ),
+  bloodyQueen(
+    name: 'bloodyQueen',
+    displayName: '블러디 퀸',
+    rewards: {_Difficulty.chaos: 8140000},
+  ),
+  vellum(
+    name: 'vellum',
+    displayName: '벨룸',
+    rewards: {_Difficulty.chaos: 9280000},
+  ),
+  pinkbin(
+    name: 'pinkbin',
+    displayName: "핑크빈",
+    rewards: {_Difficulty.chaos: 6580000},
+  ),
+  cygnus(
+    name: 'cygnus',
+    displayName: '시그너스',
+    rewards: {_Difficulty.easy: 4550000, _Difficulty.normal: 7500000},
+  ),
   lotus(
     name: 'su',
     displayName: '스우',
-    rewards: {_Difficulty.normal: 22000000, _Difficulty.hard: 77400000, _Difficulty.extreme: 549000000},
+    rewards: {
+      _Difficulty.normal: 22000000,
+      _Difficulty.hard: 77400000,
+      _Difficulty.extreme: 549000000,
+    },
   ),
-  damien(name: 'damien', displayName: '데미안', rewards: {_Difficulty.normal: 23000000, _Difficulty.hard: 73500000}),
+  damien(
+    name: 'damien',
+    displayName: '데미안',
+    rewards: {_Difficulty.normal: 23000000, _Difficulty.hard: 73500000},
+  ),
   gudianSlime(
     name: 'gudian',
     displayName: '가엔슬',
@@ -41,24 +85,44 @@ enum _Boss {
   lucid(
     name: 'lucid',
     displayName: '루시드',
-    rewards: {_Difficulty.easy: 39200000, _Difficulty.normal: 46900000, _Difficulty.hard: 94500000},
+    rewards: {
+      _Difficulty.easy: 39200000,
+      _Difficulty.normal: 46900000,
+      _Difficulty.hard: 94500000,
+    },
   ),
   will(
     name: 'will',
     displayName: '윌',
-    rewards: {_Difficulty.easy: 42500000, _Difficulty.normal: 54100000, _Difficulty.hard: 116000000},
+    rewards: {
+      _Difficulty.easy: 42500000,
+      _Difficulty.normal: 54100000,
+      _Difficulty.hard: 116000000,
+    },
   ),
-  dusk(name: 'dusk', displayName: '더스크', rewards: {_Difficulty.normal: 57900000, _Difficulty.chaos: 105000000}),
+  dusk(
+    name: 'dusk',
+    displayName: '더스크',
+    rewards: {_Difficulty.normal: 57900000, _Difficulty.chaos: 105000000},
+  ),
   jinHilla(
     name: 'jinHilla',
     displayName: '진 힐라',
     rewards: {_Difficulty.normal: 107000000, _Difficulty.hard: 160000000},
   ),
-  dunkel(name: 'dunkel', displayName: '듄켈', rewards: {_Difficulty.normal: 62500000, _Difficulty.hard: 142000000}),
+  dunkel(
+    name: 'dunkel',
+    displayName: '듄켈',
+    rewards: {_Difficulty.normal: 62500000, _Difficulty.hard: 142000000},
+  ),
   seren(
     name: 'seren',
     displayName: '세렌',
-    rewards: {_Difficulty.normal: 295000000, _Difficulty.hard: 440000000, _Difficulty.extreme: 2420000000},
+    rewards: {
+      _Difficulty.normal: 295000000,
+      _Difficulty.hard: 440000000,
+      _Difficulty.extreme: 2420000000,
+    },
   ),
   kalos(
     name: 'kalos',
@@ -80,7 +144,11 @@ enum _Boss {
       _Difficulty.extreme: 3150000000,
     },
   ),
-  limbo(name: 'limbo', displayName: '림보', rewards: {_Difficulty.normal: 900000000, _Difficulty.hard: 1930000000}),
+  limbo(
+    name: 'limbo',
+    displayName: '림보',
+    rewards: {_Difficulty.normal: 900000000, _Difficulty.hard: 1930000000},
+  ),
   baldrix(
     name: 'baldrix',
     displayName: '발드릭스',
@@ -92,7 +160,11 @@ enum _Boss {
     rewards: {_Difficulty.hard: 120000000000, _Difficulty.extreme: 15000000000},
   );
 
-  const _Boss({required this.name, required this.displayName, required this.rewards});
+  const _Boss({
+    required this.name,
+    required this.displayName,
+    required this.rewards,
+  });
   final String name;
   final String displayName;
   final Map<_Difficulty, int> rewards;
@@ -108,8 +180,14 @@ WeeklyBoss weeklyBossFromServerId(String serverId) {
   final bossName = parts[0];
   final difficultyName = parts[1];
 
-  final boss = _Boss.values.firstWhere((b) => b.name == bossName, orElse: () => _Boss.zakum);
-  final difficulty = _Difficulty.values.firstWhere((d) => d.name == difficultyName, orElse: () => _Difficulty.normal);
+  final boss = _Boss.values.firstWhere(
+    (b) => b.name == bossName,
+    orElse: () => _Boss.zakum,
+  );
+  final difficulty = _Difficulty.values.firstWhere(
+    (d) => d.name == difficultyName,
+    orElse: () => _Difficulty.normal,
+  );
 
   return WeeklyBoss(
     serverId: serverId,
