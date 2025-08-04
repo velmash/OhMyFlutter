@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:me_calculator/domain/entities/my_character.dart';
 import 'package:me_calculator/domain/usecases/get_character_usecase.dart';
+import 'package:me_calculator/utils/format_utils.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 // 생성될 코드 파일명 지정
@@ -31,6 +32,18 @@ class HomeNotifier extends StateNotifier<HomeState> {
     result.fold(
       (failure) => state = state.copyWith(isLoading: false, error: failure.message, errorMessage: failure.message),
       (characters) => state = state.copyWith(isLoading: false, characters: characters),
+    );
+  }
+
+  String get totalMeso {
+    if (state.characters.isEmpty) {
+      return "0 메소";
+    }
+
+    return formatMeso(
+      state.characters
+          .map((char) => char.bosses.map((boss) => boss.meso).fold(0, (prev, curr) => prev + curr))
+          .fold(0, (prev, curr) => prev + curr),
     );
   }
 }

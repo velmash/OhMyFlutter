@@ -20,16 +20,9 @@ class AppRouter {
     redirect: (BuildContext context, GoRouterState state) {
       final isLoggedIn = authNotifier.user != null;
 
-      final protectedRoutes = [
-        '/home',
-        '/add-character',
-        '/boss-config',
-        '/settings',
-      ];
+      final protectedRoutes = ['/home', '/add-character', '/boss-config', '/settings'];
 
-      final isProtectedRoute = protectedRoutes.any(
-        (route) => state.fullPath?.startsWith(route) ?? false,
-      );
+      final isProtectedRoute = protectedRoutes.any((route) => state.fullPath?.startsWith(route) ?? false);
 
       final authRoutes = ['/login', '/sign-up'];
       final isAuthRoute = authRoutes.contains(state.fullPath);
@@ -43,36 +36,16 @@ class AppRouter {
       return null;
     },
     routes: [
-      GoRoute(
-        path: '/login',
-        name: 'login',
-        builder: (context, state) => const LoginView(),
-      ),
-      GoRoute(
-        path: '/sign-up',
-        name: 'signUp',
-        builder: (context, state) => const SignInView(),
-      ),
+      GoRoute(path: '/login', name: 'login', builder: (context, state) => const LoginView()),
+      GoRoute(path: '/sign-up', name: 'signUp', builder: (context, state) => const SignInView()),
       ShellRoute(
         builder: (context, state, child) => MainBottomBar(child: child),
         routes: [
-          GoRoute(
-            path: '/home',
-            name: 'home',
-            builder: (context, state) => const HomeScreen(),
-          ),
-          GoRoute(
-            path: '/settings',
-            name: 'settings',
-            builder: (context, state) => const SettingScreen(),
-          ),
+          GoRoute(path: '/home', name: 'home', builder: (context, state) => const HomeScreen()),
+          GoRoute(path: '/settings', name: 'settings', builder: (context, state) => const SettingScreen()),
         ],
       ),
-      GoRoute(
-        path: '/add-character',
-        name: 'addCharacter',
-        builder: (context, state) => const AddCharacterView(),
-      ),
+      GoRoute(path: '/add-character', name: 'addCharacter', builder: (context, state) => const AddCharacterView()),
       GoRoute(
         path: '/boss-config/:characterId',
         name: 'bossConfig',
@@ -91,10 +64,7 @@ class AppRouter {
             const SizedBox(height: 16),
             Text('페이지를 찾을 수 없습니다: ${state.error}'),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () => context.go('/home'),
-              child: const Text('홈으로 돌아가기'),
-            ),
+            ElevatedButton(onPressed: () => context.go('/home'), child: const Text('홈으로 돌아가기')),
           ],
         ),
       ),

@@ -24,15 +24,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final characters = ref.watch(
-      homeProvider.select((state) => state.characters),
-    );
-    final isLoading = ref.watch(
-      homeProvider.select((state) => state.isLoading),
-    );
-    final errorMessage = ref.watch(
-      homeProvider.select((state) => state.errorMessage),
-    );
+    final characters = ref.watch(homeProvider.select((state) => state.characters));
+    final isLoading = ref.watch(homeProvider.select((state) => state.isLoading));
+    final errorMessage = ref.watch(homeProvider.select((state) => state.errorMessage));
     final homeNotifier = ref.read(homeProvider.notifier);
 
     return Scaffold(
@@ -42,24 +36,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "주간 총 수익",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-              ),
+              const Text("주간 총 수익", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
               Text(
-                characters.isEmpty ? "0 메소" : "22,333,444 메소",
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                ),
+                '총 주간 메소: ${homeNotifier.totalMeso}',
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 30),
               Row(
                 children: [
-                  const Text(
-                    "나의 캐릭터들",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                  ),
+                  const Text("나의 캐릭터들", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
                   const SizedBox(width: 10),
                   GestureDetector(
                     onTap: () {
@@ -71,11 +56,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     },
                     child: const Text(
                       "추가",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: TextStyle(color: Colors.blue, fontSize: 16, fontWeight: FontWeight.w600),
                     ),
                   ),
                 ],
@@ -90,10 +71,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         children: [
                           Text(errorMessage),
                           const SizedBox(height: 10),
-                          ElevatedButton(
-                            onPressed: () => homeNotifier.loadCharacters(),
-                            child: const Text('다시 시도'),
-                          ),
+                          ElevatedButton(onPressed: () => homeNotifier.loadCharacters(), child: const Text('다시 시도')),
                         ],
                       )
                     : characters.isEmpty
@@ -108,12 +86,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               myCharacter: character,
                               onTap: () {
                                 // go_router로 보스 설정 페이지로 이동 (캐릭터 ID 전달)
-                                context
-                                    .push('/boss-config/${character.ocid}')
-                                    .then((_) {
-                                      // 돌아올 때 캐릭터 목록 재로드
-                                      homeNotifier.loadCharacters();
-                                    });
+                                context.push('/boss-config/${character.ocid}').then((_) {
+                                  // 돌아올 때 캐릭터 목록 재로드
+                                  homeNotifier.loadCharacters();
+                                });
                               },
                             ),
                           );

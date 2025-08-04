@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MyCharacter {
 
- String get nickName; String get imagePath; String get ocid;
+ String get nickName; String get imagePath; String get ocid; List<WeeklyBoss> get bosses;
 /// Create a copy of MyCharacter
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $MyCharacterCopyWith<MyCharacter> get copyWith => _$MyCharacterCopyWithImpl<MyCh
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MyCharacter&&(identical(other.nickName, nickName) || other.nickName == nickName)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.ocid, ocid) || other.ocid == ocid));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MyCharacter&&(identical(other.nickName, nickName) || other.nickName == nickName)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.ocid, ocid) || other.ocid == ocid)&&const DeepCollectionEquality().equals(other.bosses, bosses));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,nickName,imagePath,ocid);
+int get hashCode => Object.hash(runtimeType,nickName,imagePath,ocid,const DeepCollectionEquality().hash(bosses));
 
 @override
 String toString() {
-  return 'MyCharacter(nickName: $nickName, imagePath: $imagePath, ocid: $ocid)';
+  return 'MyCharacter(nickName: $nickName, imagePath: $imagePath, ocid: $ocid, bosses: $bosses)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $MyCharacterCopyWith<$Res>  {
   factory $MyCharacterCopyWith(MyCharacter value, $Res Function(MyCharacter) _then) = _$MyCharacterCopyWithImpl;
 @useResult
 $Res call({
- String nickName, String imagePath, String ocid
+ String nickName, String imagePath, String ocid, List<WeeklyBoss> bosses
 });
 
 
@@ -62,12 +62,13 @@ class _$MyCharacterCopyWithImpl<$Res>
 
 /// Create a copy of MyCharacter
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? nickName = null,Object? imagePath = null,Object? ocid = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? nickName = null,Object? imagePath = null,Object? ocid = null,Object? bosses = null,}) {
   return _then(_self.copyWith(
 nickName: null == nickName ? _self.nickName : nickName // ignore: cast_nullable_to_non_nullable
 as String,imagePath: null == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
 as String,ocid: null == ocid ? _self.ocid : ocid // ignore: cast_nullable_to_non_nullable
-as String,
+as String,bosses: null == bosses ? _self.bosses : bosses // ignore: cast_nullable_to_non_nullable
+as List<WeeklyBoss>,
   ));
 }
 
@@ -149,10 +150,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String nickName,  String imagePath,  String ocid)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String nickName,  String imagePath,  String ocid,  List<WeeklyBoss> bosses)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MyCharacter() when $default != null:
-return $default(_that.nickName,_that.imagePath,_that.ocid);case _:
+return $default(_that.nickName,_that.imagePath,_that.ocid,_that.bosses);case _:
   return orElse();
 
 }
@@ -170,10 +171,10 @@ return $default(_that.nickName,_that.imagePath,_that.ocid);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String nickName,  String imagePath,  String ocid)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String nickName,  String imagePath,  String ocid,  List<WeeklyBoss> bosses)  $default,) {final _that = this;
 switch (_that) {
 case _MyCharacter():
-return $default(_that.nickName,_that.imagePath,_that.ocid);}
+return $default(_that.nickName,_that.imagePath,_that.ocid,_that.bosses);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -187,10 +188,10 @@ return $default(_that.nickName,_that.imagePath,_that.ocid);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String nickName,  String imagePath,  String ocid)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String nickName,  String imagePath,  String ocid,  List<WeeklyBoss> bosses)?  $default,) {final _that = this;
 switch (_that) {
 case _MyCharacter() when $default != null:
-return $default(_that.nickName,_that.imagePath,_that.ocid);case _:
+return $default(_that.nickName,_that.imagePath,_that.ocid,_that.bosses);case _:
   return null;
 
 }
@@ -202,12 +203,19 @@ return $default(_that.nickName,_that.imagePath,_that.ocid);case _:
 
 
 class _MyCharacter implements MyCharacter {
-  const _MyCharacter({required this.nickName, required this.imagePath, required this.ocid});
+  const _MyCharacter({required this.nickName, required this.imagePath, required this.ocid, required final  List<WeeklyBoss> bosses}): _bosses = bosses;
   
 
 @override final  String nickName;
 @override final  String imagePath;
 @override final  String ocid;
+ final  List<WeeklyBoss> _bosses;
+@override List<WeeklyBoss> get bosses {
+  if (_bosses is EqualUnmodifiableListView) return _bosses;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_bosses);
+}
+
 
 /// Create a copy of MyCharacter
 /// with the given fields replaced by the non-null parameter values.
@@ -219,16 +227,16 @@ _$MyCharacterCopyWith<_MyCharacter> get copyWith => __$MyCharacterCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MyCharacter&&(identical(other.nickName, nickName) || other.nickName == nickName)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.ocid, ocid) || other.ocid == ocid));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MyCharacter&&(identical(other.nickName, nickName) || other.nickName == nickName)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.ocid, ocid) || other.ocid == ocid)&&const DeepCollectionEquality().equals(other._bosses, _bosses));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,nickName,imagePath,ocid);
+int get hashCode => Object.hash(runtimeType,nickName,imagePath,ocid,const DeepCollectionEquality().hash(_bosses));
 
 @override
 String toString() {
-  return 'MyCharacter(nickName: $nickName, imagePath: $imagePath, ocid: $ocid)';
+  return 'MyCharacter(nickName: $nickName, imagePath: $imagePath, ocid: $ocid, bosses: $bosses)';
 }
 
 
@@ -239,7 +247,7 @@ abstract mixin class _$MyCharacterCopyWith<$Res> implements $MyCharacterCopyWith
   factory _$MyCharacterCopyWith(_MyCharacter value, $Res Function(_MyCharacter) _then) = __$MyCharacterCopyWithImpl;
 @override @useResult
 $Res call({
- String nickName, String imagePath, String ocid
+ String nickName, String imagePath, String ocid, List<WeeklyBoss> bosses
 });
 
 
@@ -256,12 +264,13 @@ class __$MyCharacterCopyWithImpl<$Res>
 
 /// Create a copy of MyCharacter
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? nickName = null,Object? imagePath = null,Object? ocid = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? nickName = null,Object? imagePath = null,Object? ocid = null,Object? bosses = null,}) {
   return _then(_MyCharacter(
 nickName: null == nickName ? _self.nickName : nickName // ignore: cast_nullable_to_non_nullable
 as String,imagePath: null == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
 as String,ocid: null == ocid ? _self.ocid : ocid // ignore: cast_nullable_to_non_nullable
-as String,
+as String,bosses: null == bosses ? _self._bosses : bosses // ignore: cast_nullable_to_non_nullable
+as List<WeeklyBoss>,
   ));
 }
 

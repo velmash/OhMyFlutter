@@ -21,7 +21,7 @@ class FirestoreDatasourceImpl implements FirestoreDatasource {
 
       return querySnapshot.docs
           .map(
-            (doc) => MyCharacterDTO.fromMap(
+            (doc) => MyCharacterDTO.fromJson(
               doc.data() as Map<String, dynamic>,
             ).toMyCharacter(),
           )

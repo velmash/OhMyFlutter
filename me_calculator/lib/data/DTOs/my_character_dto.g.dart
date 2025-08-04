@@ -11,6 +11,11 @@ _MyCharacterDTO _$MyCharacterDTOFromJson(Map<String, dynamic> json) =>
       nickName: json['nickName'] as String,
       imagePath: json['imagePath'] as String,
       ocid: json['ocid'] as String,
+      bosses:
+          (json['bosses'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$MyCharacterDTOToJson(_MyCharacterDTO instance) =>
@@ -18,4 +23,5 @@ Map<String, dynamic> _$MyCharacterDTOToJson(_MyCharacterDTO instance) =>
       'nickName': instance.nickName,
       'imagePath': instance.imagePath,
       'ocid': instance.ocid,
+      'bosses': instance.bosses,
     };
