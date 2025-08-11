@@ -19,13 +19,21 @@ class FirestoreDatasourceImpl implements FirestoreDatasource {
           // .orderBy('createdAt', descending: true)
           .get(); // .snapshots() 대신 .get() 사용
 
-      return querySnapshot.docs
+      List<MyCharacter> characters = querySnapshot.docs
           .map(
-            (doc) => MyCharacterDTO.fromMap(
+            (doc) => MyCharacterDTO.fromJson(
               doc.data() as Map<String, dynamic>,
             ).toMyCharacter(),
           )
           .toList();
+
+      characters.sort((a, b) {
+        final totalMesoA = a.bosses.fold(0, (sum, boss) => sum + boss.meso);
+        final totalMesoB = b.bosses.fold(0, (sum, boss) => sum + boss.meso);
+        return totalMesoB.compareTo(totalMesoA);
+      });
+
+      return characters;
     } catch (e) {
       print('캐릭터 조회 실패: $e');
       return [];

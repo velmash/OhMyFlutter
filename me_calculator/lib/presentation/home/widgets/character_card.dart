@@ -31,7 +31,7 @@ class CharacterCard extends StatelessWidget {
                 children: [
                   Text(myCharacter.nickName),
                   SizedBox(height: 10),
-                  Text("10,000,000 메소"),
+                  Text("${myCharacter.totalMeso}"),
                 ],
               ),
               Spacer(),

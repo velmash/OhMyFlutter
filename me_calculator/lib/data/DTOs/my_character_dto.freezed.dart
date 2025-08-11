@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MyCharacterDTO {
 
- String get nickName; String get imagePath; String get ocid;
+ String get nickName; String get imagePath; String get ocid; List<String> get bosses;
 /// Create a copy of MyCharacterDTO
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $MyCharacterDTOCopyWith<MyCharacterDTO> get copyWith => _$MyCharacterDTOCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MyCharacterDTO&&(identical(other.nickName, nickName) || other.nickName == nickName)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.ocid, ocid) || other.ocid == ocid));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MyCharacterDTO&&(identical(other.nickName, nickName) || other.nickName == nickName)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.ocid, ocid) || other.ocid == ocid)&&const DeepCollectionEquality().equals(other.bosses, bosses));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,nickName,imagePath,ocid);
+int get hashCode => Object.hash(runtimeType,nickName,imagePath,ocid,const DeepCollectionEquality().hash(bosses));
 
 @override
 String toString() {
-  return 'MyCharacterDTO(nickName: $nickName, imagePath: $imagePath, ocid: $ocid)';
+  return 'MyCharacterDTO(nickName: $nickName, imagePath: $imagePath, ocid: $ocid, bosses: $bosses)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $MyCharacterDTOCopyWith<$Res>  {
   factory $MyCharacterDTOCopyWith(MyCharacterDTO value, $Res Function(MyCharacterDTO) _then) = _$MyCharacterDTOCopyWithImpl;
 @useResult
 $Res call({
- String nickName, String imagePath, String ocid
+ String nickName, String imagePath, String ocid, List<String> bosses
 });
 
 
@@ -65,12 +65,13 @@ class _$MyCharacterDTOCopyWithImpl<$Res>
 
 /// Create a copy of MyCharacterDTO
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? nickName = null,Object? imagePath = null,Object? ocid = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? nickName = null,Object? imagePath = null,Object? ocid = null,Object? bosses = null,}) {
   return _then(_self.copyWith(
 nickName: null == nickName ? _self.nickName : nickName // ignore: cast_nullable_to_non_nullable
 as String,imagePath: null == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
 as String,ocid: null == ocid ? _self.ocid : ocid // ignore: cast_nullable_to_non_nullable
-as String,
+as String,bosses: null == bosses ? _self.bosses : bosses // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 
@@ -155,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String nickName,  String imagePath,  String ocid)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String nickName,  String imagePath,  String ocid,  List<String> bosses)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MyCharacterDTO() when $default != null:
-return $default(_that.nickName,_that.imagePath,_that.ocid);case _:
+return $default(_that.nickName,_that.imagePath,_that.ocid,_that.bosses);case _:
   return orElse();
 
 }
@@ -176,10 +177,10 @@ return $default(_that.nickName,_that.imagePath,_that.ocid);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String nickName,  String imagePath,  String ocid)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String nickName,  String imagePath,  String ocid,  List<String> bosses)  $default,) {final _that = this;
 switch (_that) {
 case _MyCharacterDTO():
-return $default(_that.nickName,_that.imagePath,_that.ocid);case _:
+return $default(_that.nickName,_that.imagePath,_that.ocid,_that.bosses);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +197,10 @@ return $default(_that.nickName,_that.imagePath,_that.ocid);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String nickName,  String imagePath,  String ocid)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String nickName,  String imagePath,  String ocid,  List<String> bosses)?  $default,) {final _that = this;
 switch (_that) {
 case _MyCharacterDTO() when $default != null:
-return $default(_that.nickName,_that.imagePath,_that.ocid);case _:
+return $default(_that.nickName,_that.imagePath,_that.ocid,_that.bosses);case _:
   return null;
 
 }
@@ -211,12 +212,19 @@ return $default(_that.nickName,_that.imagePath,_that.ocid);case _:
 @JsonSerializable()
 
 class _MyCharacterDTO implements MyCharacterDTO {
-  const _MyCharacterDTO({required this.nickName, required this.imagePath, required this.ocid});
+  const _MyCharacterDTO({required this.nickName, required this.imagePath, required this.ocid, final  List<String> bosses = const []}): _bosses = bosses;
   factory _MyCharacterDTO.fromJson(Map<String, dynamic> json) => _$MyCharacterDTOFromJson(json);
 
 @override final  String nickName;
 @override final  String imagePath;
 @override final  String ocid;
+ final  List<String> _bosses;
+@override@JsonKey() List<String> get bosses {
+  if (_bosses is EqualUnmodifiableListView) return _bosses;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_bosses);
+}
+
 
 /// Create a copy of MyCharacterDTO
 /// with the given fields replaced by the non-null parameter values.
@@ -231,16 +239,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MyCharacterDTO&&(identical(other.nickName, nickName) || other.nickName == nickName)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.ocid, ocid) || other.ocid == ocid));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MyCharacterDTO&&(identical(other.nickName, nickName) || other.nickName == nickName)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.ocid, ocid) || other.ocid == ocid)&&const DeepCollectionEquality().equals(other._bosses, _bosses));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,nickName,imagePath,ocid);
+int get hashCode => Object.hash(runtimeType,nickName,imagePath,ocid,const DeepCollectionEquality().hash(_bosses));
 
 @override
 String toString() {
-  return 'MyCharacterDTO(nickName: $nickName, imagePath: $imagePath, ocid: $ocid)';
+  return 'MyCharacterDTO(nickName: $nickName, imagePath: $imagePath, ocid: $ocid, bosses: $bosses)';
 }
 
 
@@ -251,7 +259,7 @@ abstract mixin class _$MyCharacterDTOCopyWith<$Res> implements $MyCharacterDTOCo
   factory _$MyCharacterDTOCopyWith(_MyCharacterDTO value, $Res Function(_MyCharacterDTO) _then) = __$MyCharacterDTOCopyWithImpl;
 @override @useResult
 $Res call({
- String nickName, String imagePath, String ocid
+ String nickName, String imagePath, String ocid, List<String> bosses
 });
 
 
@@ -268,12 +276,13 @@ class __$MyCharacterDTOCopyWithImpl<$Res>
 
 /// Create a copy of MyCharacterDTO
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? nickName = null,Object? imagePath = null,Object? ocid = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? nickName = null,Object? imagePath = null,Object? ocid = null,Object? bosses = null,}) {
   return _then(_MyCharacterDTO(
 nickName: null == nickName ? _self.nickName : nickName // ignore: cast_nullable_to_non_nullable
 as String,imagePath: null == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
 as String,ocid: null == ocid ? _self.ocid : ocid // ignore: cast_nullable_to_non_nullable
-as String,
+as String,bosses: null == bosses ? _self._bosses : bosses // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 
