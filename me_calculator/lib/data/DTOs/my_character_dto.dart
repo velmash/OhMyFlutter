@@ -11,7 +11,7 @@ abstract class MyCharacterDTO with _$MyCharacterDTO {
     required String nickName,
     required String imagePath,
     required String ocid,
-    @Default([]) List<String> bosses,
+    @Default([]) List<Map<String, dynamic>> bosses,
   }) = _MyCharacterDTO;
 
   factory MyCharacterDTO.fromJson(Map<String, dynamic> json) => _$MyCharacterDTOFromJson(json);
