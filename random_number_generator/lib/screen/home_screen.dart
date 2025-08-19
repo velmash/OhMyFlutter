@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:random_number_generator/constant/color.dart';
+import 'package:random_number_generator/screen/number_to_image.dart';
 import 'dart:math';
+
+import 'package:random_number_generator/screen/setting_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,12 +25,23 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _Header(),
+              _Header(onPressed: onSettingIconPressed),
               _Body(numbers: numbers),
               _Footer(onPressed: generateRandomNum),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  void onSettingIconPressed() {
+    //StatefulWidget에서는 context가 전역적으로 사용 가능하다.
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return SettingScreen();
+        },
       ),
     );
   }
@@ -48,7 +62,8 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class _Header extends StatelessWidget {
-  const _Header({super.key});
+  final VoidCallback onPressed;
+  const _Header({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +72,14 @@ class _Header extends StatelessWidget {
       children: [
         Text(
           "랜덤숫자 생성기",
-          style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w700),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: onPressed,
           icon: Icon(Icons.settings, color: redColor),
         ),
       ],
@@ -77,14 +96,7 @@ class _Body extends StatelessWidget {
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: numbers
-            .map((e) => e.toString().split(""))
-            .map(
-              (row) => Row(
-                children: row.map((number) => Image.asset("asset/img/$number.png", width: 50, height: 70)).toList(),
-              ),
-            )
-            .toList(),
+        children: numbers.map((e) => NumberToImage(number: e)).toList(),
       ),
     );
   }
