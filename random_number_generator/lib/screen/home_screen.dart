@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:random_number_generator/constant/color.dart';
-import 'package:random_number_generator/screen/number_to_image.dart';
+import 'package:random_number_generator/component/number_to_image.dart';
 import 'dart:math';
 
 import 'package:random_number_generator/screen/setting_screen.dart';
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class _Header extends StatelessWidget {
   final VoidCallback onPressed;
-  const _Header({super.key, required this.onPressed});
+  const _Header({required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,7 @@ class _Header extends StatelessWidget {
 
 class _Body extends StatelessWidget {
   final List<int> numbers;
-  const _Body({super.key, required this.numbers});
+  const _Body({required this.numbers});
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +105,7 @@ class _Body extends StatelessWidget {
 class _Footer extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const _Footer({super.key, required this.onPressed});
+  const _Footer({required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +114,6 @@ class _Footer extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: redColor,
         foregroundColor: Colors.white,
-        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
       child: Text("생성하기"),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:random_number_generator/constant/color.dart';
-import 'package:random_number_generator/screen/number_to_image.dart';
+import 'package:random_number_generator/component/number_to_image.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -35,18 +35,16 @@ class _SettingScreenState extends State<SettingScreen> {
 
 class _Number extends StatelessWidget {
   final double maxNumber;
-  const _Number({super.key, required this.maxNumber});
+  const _Number({required this.maxNumber});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(child: NumberToImage(number: maxNumber.toInt())),
-    );
+    return Expanded(child: NumberToImage(number: maxNumber.toInt()));
   }
 }
 
 class _Slider extends StatelessWidget {
-  const _Slider({super.key});
+  const _Slider();
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +53,7 @@ class _Slider extends StatelessWidget {
 }
 
 class _Button extends StatelessWidget {
-  const _Button({super.key});
+  const _Button();
 
   @override
   Widget build(BuildContext context) {
