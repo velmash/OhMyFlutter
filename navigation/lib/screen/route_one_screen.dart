@@ -9,7 +9,7 @@ class RouteOneScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      // 시스템에서 제공하는 뒤로가기 버튼 막기
+      // 시스템에서 제공하는 뒤로가기 버튼 막기 (Appbar, 드래그, 안드로이드 뒤로가기 버튼)
       canPop: false,
       child: DefaultLayout(
         title: "Route One Screen",
